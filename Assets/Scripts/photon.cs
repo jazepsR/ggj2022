@@ -5,13 +5,18 @@ using UnityEngine;
 public class photon : MonoBehaviour
 {
     public float force = 10;
+    public float waveDistance = 7;
     Rigidbody2D rb;
     enum photonStates  {PARTICLE,WAVE,IDLE,AIMING};
     photonStates activeState = photonStates.IDLE;
+    public GameObject circle;
+    TrailRenderer trail;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        circle.SetActive(false);
+        trail = GetComponent<TrailRenderer>();
     }
     // Start is called before the first frame update
     void Start()
@@ -25,31 +30,44 @@ public class photon : MonoBehaviour
     switch (activeState)
     {
         case photonStates.IDLE:
-            break;
+                trail.enabled = true;
+                break;
         case photonStates.AIMING:
             if (Input.GetMouseButtonUp(0))
             {
                 Vector2 direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 rb.AddForce(direction.normalized * force);
                 activeState = photonStates.PARTICLE;
-            }
+                    Debug.LogError("Particle STATE!");
+                }
             
             break;
 
         case photonStates.PARTICLE:
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.LogError("PARTICLE STATE!");
                 activeState = photonStates.WAVE;
-                //rb.Constrains = Rigidbody2D.FREEZE_ALLL
-            }
+                    Debug.LogError("WAVE STATE!");
+                    rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                    circle.SetActive(true);
+                    trail.enabled = false;
+                }
             break;
         case photonStates.WAVE:
             if (Input.GetMouseButtonUp(0))
             {
-                Debug.LogError("WAVE STATE!");
-                activeState = photonStates.IDLE;
-            }
+                    Vector2 direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    if (direction.magnitude <waveDistance)
+                    {
+                        activeState = photonStates.IDLE;
+                        Debug.LogError("Idle STATE!");
+                        circle.SetActive(false);
+                        Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                        transform.position = pos;
+                        rb.constraints = RigidbodyConstraints2D.None;
+                    }
+
+                }
             break;
 
     }
@@ -58,8 +76,11 @@ public class photon : MonoBehaviour
 
     public void onClick()
     {
-        Debug.LogError("AIMING STATE!");
-         activeState = photonStates.AIMING; 
+        if (activeState == photonStates.IDLE)
+        {
+            Debug.LogError("AIMING STATE!");
+            activeState = photonStates.AIMING;
+        }
         
     }
 

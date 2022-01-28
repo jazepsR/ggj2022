@@ -6,7 +6,8 @@ public class photon : MonoBehaviour
 {
     public float force = 10;
     Rigidbody2D rb;
-    bool isAiming; 
+    enum photonStates = {PARTICLE,WAVE,IDLE,AIMING};
+    photonStates activeState = IDLE;
 
     private void Awake()
     {
@@ -21,21 +22,45 @@ public class photon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isAiming)
-        {
+    switch (activeState)
+    {
+        case IDLE:
+            break;
+        case AIMING:
             if (Input.GetMouseButtonUp(0))
             {
-                Vector2 direction = transform.position -  Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 rb.AddForce(direction.normalized * force);
                 isAiming = false;
+                activeState = PARTICLE;
             }
-        }
+            
+            break;
+
+        case PARTICLE:
+            if (Input.GetMouseButtonDown(0))
+            {
+                Debug.LogError("PARTICLE STATE!");
+                activeState = WAVE;
+                //rb.Constrains = Rigidbody2D.FREEZE_ALLL
+            }
+            break;
+        case WAVE:
+            if (Input.GetMouseButtonUp(0))
+            {
+                Debug.LogError("WAVE STATE!");
+                activeState = IDLE;
+            }
+            break;
+
+    }
+
     }
 
     public void onClick()
     {
-        Debug.LogError("CLICKED!");
-        isAiming = true;
+        Debug.LogError("AIMING STATE!");
+         activeState = AIMING; 
 
         
     }

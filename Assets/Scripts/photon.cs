@@ -6,8 +6,8 @@ public class photon : MonoBehaviour
 {
     public float force = 10;
     Rigidbody2D rb;
-    enum photonStates = {PARTICLE,WAVE,IDLE,AIMING};
-    photonStates activeState = IDLE;
+    enum photonStates  {PARTICLE,WAVE,IDLE,AIMING};
+    photonStates activeState = photonStates.IDLE;
 
     private void Awake()
     {
@@ -24,32 +24,31 @@ public class photon : MonoBehaviour
     {
     switch (activeState)
     {
-        case IDLE:
+        case photonStates.IDLE:
             break;
-        case AIMING:
+        case photonStates.AIMING:
             if (Input.GetMouseButtonUp(0))
             {
                 Vector2 direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 rb.AddForce(direction.normalized * force);
-                isAiming = false;
-                activeState = PARTICLE;
+                activeState = photonStates.PARTICLE;
             }
             
             break;
 
-        case PARTICLE:
+        case photonStates.PARTICLE:
             if (Input.GetMouseButtonDown(0))
             {
                 Debug.LogError("PARTICLE STATE!");
-                activeState = WAVE;
+                activeState = photonStates.WAVE;
                 //rb.Constrains = Rigidbody2D.FREEZE_ALLL
             }
             break;
-        case WAVE:
+        case photonStates.WAVE:
             if (Input.GetMouseButtonUp(0))
             {
                 Debug.LogError("WAVE STATE!");
-                activeState = IDLE;
+                activeState = photonStates.IDLE;
             }
             break;
 
@@ -60,8 +59,7 @@ public class photon : MonoBehaviour
     public void onClick()
     {
         Debug.LogError("AIMING STATE!");
-         activeState = AIMING; 
-
+         activeState = photonStates.AIMING; 
         
     }
 

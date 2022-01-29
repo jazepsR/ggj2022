@@ -10,18 +10,24 @@ public class photon : MonoBehaviour
     enum photonStates  {PARTICLE,WAVE,IDLE,AIMING};
     photonStates activeState = photonStates.IDLE;
     public GameObject circle;
+    public GameObject directionArrow;
     TrailRenderer trail;
+    private Vector3 lastPosition;
+    public float distanceTraveled = 0;
+    public float maxDistance = 50;
+    public HealthBar healthBar;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        circle.SetActive(false);
+        circle.SetActive(false);    
+        directionArrow.SetActive(false);
         trail = GetComponent<TrailRenderer>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        lastPosition = transform.position ;
     }
 
     // Update is called once per frame
@@ -38,12 +44,18 @@ public class photon : MonoBehaviour
                 Vector2 direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 rb.AddForce(direction.normalized * force);
                 activeState = photonStates.PARTICLE;
-                    Debug.LogError("Particle STATE!");
+                Debug.LogError("Particle STATE!");
+                directionArrow.SetActive(false);
+
                 }
             
             break;
 
         case photonStates.PARTICLE:
+            distanceTraveled += Vector3.Distance(lastPosition, transform.position);
+            lastPosition = transform.position;
+            Debug.LogError("Distance traveled " + distanceTraveled.ToString());
+            healthBar.UpdateHealthBar();
             if (Input.GetMouseButtonDown(0))
             {
                 activeState = photonStates.WAVE;
@@ -80,6 +92,8 @@ public class photon : MonoBehaviour
         {
             Debug.LogError("AIMING STATE!");
             activeState = photonStates.AIMING;
+            directionArrow.SetActive(true);
+            //(transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
         }
         
     }

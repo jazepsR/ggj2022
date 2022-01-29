@@ -11,7 +11,6 @@ public class photon : MonoBehaviour
     enum photonStates  {PARTICLE,WAVE,IDLE,AIMING};
     photonStates activeState = photonStates.IDLE;
     public GameObject circle;
-    public GameObject directionArrow;
     TrailRenderer trail;
     private Vector3 lastPosition;
     public float distanceTraveled = 0;
@@ -19,14 +18,15 @@ public class photon : MonoBehaviour
     public HealthBar healthBar;
     public int maxWaveLives = 5;//Probably level speciffic
     public int currentWaveLives = 5;
+    [SerializeField] private aimArrow aimArrow;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         circle.SetActive(false);    
-        directionArrow.SetActive(false);
         trail = GetComponent<TrailRenderer>();
         startingCoordinates = transform.position;
+        aimArrow.ToggleArrow(false);
     }
     // Start is called before the first frame update
     void Start()
@@ -37,6 +37,7 @@ public class photon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector2 direction;
     switch (activeState)
     {
         case photonStates.IDLE:
@@ -44,14 +45,16 @@ public class photon : MonoBehaviour
                 //Vector2 direction = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
                 break;
         case photonStates.AIMING:
-            if (Input.GetMouseButtonUp(0))
+
+                direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                aimArrow.ToggleArrow(true);
+                aimArrow.SetRotation(direction);
+                if (Input.GetMouseButtonUp(0))
             {
-                Vector2 direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 rb.AddForce(direction.normalized * force);
                 activeState = photonStates.PARTICLE;
                 Debug.LogError("Particle STATE!");
-                directionArrow.SetActive(false);
-
+                    aimArrow.ToggleArrow(false);
                 }
             
             break;
@@ -73,7 +76,7 @@ public class photon : MonoBehaviour
         case photonStates.WAVE:
             if (Input.GetMouseButtonUp(0))
             {
-                    Vector2 direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     if (direction.magnitude <waveDistance)
                     {
                         activeState = photonStates.IDLE;
@@ -97,7 +100,6 @@ public class photon : MonoBehaviour
         {
             Debug.LogError("AIMING STATE!");
             activeState = photonStates.AIMING;
-            directionArrow.SetActive(true);
         }
         
     }

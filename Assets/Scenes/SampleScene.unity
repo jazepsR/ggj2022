@@ -660,13 +660,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 192bbd218b08e3844b9c15ae8d863b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingCoordinates: {x: 0, y: 0}
   force: 500
   waveDistance: 5
   circle: {fileID: 744966874}
-  directionArrow: {fileID: 1980608291}
   distanceTraveled: 0
   maxDistance: 50
   healthBar: {fileID: 251034479}
+  maxWaveLives: 5
+  currentWaveLives: 5
+  aimArrow: {fileID: 1980608294}
 --- !u!212 &631210958
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1876,6 +1879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1980608292}
   - component: {fileID: 1980608293}
+  - component: {fileID: 1980608294}
   m_Layer: 0
   m_Name: directionArrow
   m_TagString: Untagged
@@ -1891,8 +1895,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1980608291}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 0.15, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.800591, y: 0.3399307, z: 1}
   m_Children: []
   m_Father: {fileID: 631210959}
   m_RootOrder: 1
@@ -1936,8 +1940,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
+  m_SortingOrder: -1
+  m_Sprite: {fileID: 21300000, guid: 0c12a16573c34d742ac19d50c2158d4f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1948,3 +1952,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1980608294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980608291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a634f323d9a4c4748ba99f173ee8a79c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 20

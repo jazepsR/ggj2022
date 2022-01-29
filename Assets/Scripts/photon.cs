@@ -22,6 +22,7 @@ public class photon : MonoBehaviour
     [SerializeField] private aimArrow aimArrow;
     private Transform finish;
     public float finishPullForce = 1000;
+    public LayerMask layerMask;
 
     public void SetUp(int maxWaveTravels, float maxParticleDuration, Transform startPoint){
         maxDistance = maxParticleDuration;
@@ -74,12 +75,15 @@ public class photon : MonoBehaviour
             distanceTraveled += Vector3.Distance(lastPosition, transform.position);
             lastPosition = transform.position;
             if (Input.GetMouseButtonDown(0) && currentWaveLives>=1)
-            {
-                activeState = photonStates.WAVE;
-                    Debug.LogError("WAVE STATE!");
-                    rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                    circle.SetActive(true);
-                    trail.enabled = false;
+                {
+                    direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                        activeState = photonStates.WAVE;
+                        Debug.LogError("WAVE STATE!");
+                        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                        circle.SetActive(true);
+                        trail.enabled = false;
+
                 }
             if(healthBar.HealthBarRedrawAndIsEmpty()){
                 Reset();
@@ -89,17 +93,26 @@ public class photon : MonoBehaviour
             
             if (Input.GetMouseButtonUp(0))
             {
-                    direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
                     if (direction.magnitude <waveDistance)
                     {
-                        currentWaveLives-=1;
-                        waveLivesDisplay.SetLives(currentWaveLives);
-                        activeState = photonStates.IDLE;
-                        Debug.LogError("Idle STATE!");
-                        circle.SetActive(false);
-                        Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                        transform.position = pos;
-                        rb.constraints = RigidbodyConstraints2D.None;
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position, -direction,direction.magnitude,layerMask);
+                        if (hit.collider == null)
+                        {
+                            currentWaveLives -=1;
+                            waveLivesDisplay.SetLives(currentWaveLives);
+                            activeState = photonStates.IDLE;
+                            Debug.LogError("Idle STATE!");
+                            circle.SetActive(false);
+                            Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                            transform.position = pos;
+                            rb.constraints = RigidbodyConstraints2D.None;
+                        }
+                        else
+                        {
+                           // Debug.LogError(hit.collider.name);
+                        }
                     }
 
                 }

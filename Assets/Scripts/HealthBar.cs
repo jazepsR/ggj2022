@@ -21,8 +21,13 @@ public class HealthBar : MonoBehaviour
         
     }
 
-      public void UpdateHealthBar() {
-          Debug.LogError("Fill Amount " + Mathf.Clamp(photon.distanceTraveled / photon.maxDistance, 0, 1f));
-    healthBarImage.fillAmount = Mathf.Clamp(photon.distanceTraveled / photon.maxDistance, 0, 1f);
-  }
+    public bool HealthBarRedrawAndIsEmpty() {
+        float fillAmount = Mathf.Clamp(photon.distanceTraveled / photon.maxDistance, 0, 1f);
+        healthBarImage.fillAmount = fillAmount;
+        if(fillAmount==1f){
+            return true;
+        } else{
+            return false;
+        }
+    }
 }

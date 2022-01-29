@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class photon : MonoBehaviour
 {
+    public Vector2 startingCoordinates;
     public float force = 10;
     public float waveDistance = 7;
     Rigidbody2D rb;
@@ -14,8 +15,10 @@ public class photon : MonoBehaviour
     TrailRenderer trail;
     private Vector3 lastPosition;
     public float distanceTraveled = 0;
-    public float maxDistance = 50;
+    public float maxDistance = 50;//Probably level speciffic, 
     public HealthBar healthBar;
+    public int maxWaveLives = 5;//Probably level speciffic
+    public int currentWaveLives = 5;
 
     private void Awake()
     {
@@ -23,6 +26,7 @@ public class photon : MonoBehaviour
         circle.SetActive(false);    
         directionArrow.SetActive(false);
         trail = GetComponent<TrailRenderer>();
+        startingCoordinates = transform.position;
     }
     // Start is called before the first frame update
     void Start()
@@ -37,6 +41,7 @@ public class photon : MonoBehaviour
     {
         case photonStates.IDLE:
                 trail.enabled = true;
+                //Vector2 direction = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
                 break;
         case photonStates.AIMING:
             if (Input.GetMouseButtonUp(0))
@@ -54,8 +59,8 @@ public class photon : MonoBehaviour
         case photonStates.PARTICLE:
             distanceTraveled += Vector3.Distance(lastPosition, transform.position);
             lastPosition = transform.position;
-            Debug.LogError("Distance traveled " + distanceTraveled.ToString());
-            healthBar.UpdateHealthBar();
+            if(healthBar.HealthBarRedrawAndIsEmpty())
+                Reset();
             if (Input.GetMouseButtonDown(0))
             {
                 activeState = photonStates.WAVE;
@@ -93,9 +98,16 @@ public class photon : MonoBehaviour
             Debug.LogError("AIMING STATE!");
             activeState = photonStates.AIMING;
             directionArrow.SetActive(true);
-            //(transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
         }
         
+    }
+
+    public void Reset(){
+        activeState = photonStates.IDLE;
+        transform.position = startingCoordinates;
+        distanceTraveled = 0;
+        currentWaveLives = maxWaveLives;
+        healthBar.HealthBarRedrawAndIsEmpty();
     }
 
 }

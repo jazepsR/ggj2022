@@ -15,3 +15,4 @@ MonoBehaviour:
   levelGeometry: {fileID: 7749075644926940155, guid: 3aae806ad782f584c946c33518a93594, type: 3}
   shotsAllowed: 3
   particleDuration: 40
+  staticCamera: 1

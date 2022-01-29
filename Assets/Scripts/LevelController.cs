@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 public class LevelController : MonoBehaviour
 {
     public LevelData[] levels;
@@ -9,8 +10,9 @@ public class LevelController : MonoBehaviour
     [HideInInspector] public Level activeLevel;
     public static LevelController instance;
     public GameObject levelCompleteMenu;
-
+    public CinemachineVirtualCamera cam;
     public photon photon;
+    public Transform center;
 
     private void Awake()
     {
@@ -27,7 +29,8 @@ public class LevelController : MonoBehaviour
     {
         activeLevel= Instantiate(level.levelGeometry);
         photon.SetUp(level.shotsAllowed, level.particleDuration, level.levelGeometry.start);
-        
+        cam.m_Follow = level.staticCamera ? center : photon.transform;
+        cam.m_LookAt = level.staticCamera ? center : photon.transform;
     }
 
     public void CompleteLevel()

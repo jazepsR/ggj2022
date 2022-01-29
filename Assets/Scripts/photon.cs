@@ -84,6 +84,7 @@ public class photon : MonoBehaviour
             lastPosition = transform.position;
             if (Input.GetMouseButtonDown(0) && currentWaveLives>=1)
                 {
+                    distanceTraveled = 0.0f;
                     activeState = photonStates.WAVE;
                     Debug.LogError("WAVE STATE!");
                     rb.constraints = RigidbodyConstraints2D.FreezeAll;

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: 
   levelGeometry: {fileID: 7749075644926940155, guid: f3e941d9bbc8b6a43b5c19105e1d0c59, type: 3}
-  shotsAllowed: 0
-  particleDuration: 100
+  shotsAllowed: 3
+  particleDuration: 40

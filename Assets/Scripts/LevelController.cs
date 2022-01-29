@@ -44,4 +44,8 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene("SampleScene");
     }
 
+    public void ResetLevel()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
 }

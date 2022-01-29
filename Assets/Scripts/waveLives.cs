@@ -12,11 +12,14 @@ public class waveLives : MonoBehaviour
     public Image life5;
     Image[] lives;
 
-    private 
+    private void Awake(){
+        lives = new Image[5]{life1, life2, life3, life4, life5};
+    }
+
+     
     // Start is called before the first frame update
     void Start()
-    {
-        lives = new Image[5]{life1, life2, life3, life4, life5};
+    {      
 
     }
 

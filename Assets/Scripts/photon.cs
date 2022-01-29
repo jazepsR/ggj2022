@@ -28,14 +28,15 @@ public class photon : MonoBehaviour
         circle.SetActive(false);    
         trail = GetComponent<TrailRenderer>();
         startingCoordinates = transform.position;
+        lastPosition = transform.position ;
         aimArrow.ToggleArrow(false);
+ 
     }
     // Start is called before the first frame update
     void Start()
     {
         Debug.LogError("STARTING!");
-        lastPosition = transform.position ;
-        //waveLivesDisplay.SetLives(currentWaveLives); 
+        waveLivesDisplay.SetLives(currentWaveLives); 
     }
 
     // Update is called once per frame

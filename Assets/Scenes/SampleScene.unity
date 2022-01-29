@@ -286,7 +286,7 @@ RectTransform:
   m_Children:
   - {fileID: 659809083}
   m_Father: {fileID: 686566384}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -512,7 +512,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 686566384}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -1269,6 +1269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
+  - {fileID: 11400000, guid: 9e9186c78c98d6644a5b5ab979fdcb3b, type: 2}
   - {fileID: 11400000, guid: 5908daf443761de43860a6e9ad635fa0, type: 2}
   - {fileID: 11400000, guid: e54e6f9a07da33a4a8cb01c26aa04486, type: 2}
   - {fileID: 11400000, guid: 8c0c2ffc4a4b61b4ab203682729e4cad, type: 2}
@@ -1388,8 +1389,8 @@ RectTransform:
   - {fileID: 268179543}
   - {fileID: 1024324256}
   - {fileID: 1497625567}
-  - {fileID: 221083591}
   - {fileID: 354181165}
+  - {fileID: 221083591}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1489,7 +1490,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 49b8d7da691dd364ba53cc01ab80d9a3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1baf7d753ef9dc44fbd683aef8076bfe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2674,7 +2675,7 @@ Transform:
   m_GameObject: {fileID: 1980608291}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.3399307, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 631210959}
   m_RootOrder: 1
@@ -2719,7 +2720,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 0c12a16573c34d742ac19d50c2158d4f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4521445014d39204081b0c411d979533, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

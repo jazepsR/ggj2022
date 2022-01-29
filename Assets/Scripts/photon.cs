@@ -65,8 +65,8 @@ public class photon : MonoBehaviour
                 //Vector2 direction = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
                 break;
         case photonStates.AIMING:
-
                 direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                aimArrow.transform.localScale = Vector3.one * Mathf.Min(1, direction.magnitude / 1.2f);
                 aimArrow.SetRotation(direction);
                 if (Input.GetMouseButtonUp(0))
                 {

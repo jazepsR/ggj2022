@@ -14,10 +14,11 @@ public class photon : MonoBehaviour
     TrailRenderer trail;
     private Vector3 lastPosition;
     public float distanceTraveled = 0;
-    public float maxDistance = 50;//Probably level speciffic, 
+    public float maxDistance = 150;//Probably level speciffic, 
     public HealthBar healthBar;
     public int maxWaveLives = 5;//Probably level speciffic
     public int currentWaveLives = 5;
+    public waveLives waveLivesDisplay;
     [SerializeField] private aimArrow aimArrow;
 
     private void Awake()
@@ -31,7 +32,9 @@ public class photon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.LogError("STARTING!");
         lastPosition = transform.position ;
+        waveLivesDisplay.SetLives(currentWaveLives);
     }
 
     // Update is called once per frame
@@ -47,7 +50,6 @@ public class photon : MonoBehaviour
         case photonStates.AIMING:
 
                 direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                aimArrow.ToggleArrow(true);
                 aimArrow.SetRotation(direction);
                 if (Input.GetMouseButtonUp(0))
             {
@@ -62,9 +64,7 @@ public class photon : MonoBehaviour
         case photonStates.PARTICLE:
             distanceTraveled += Vector3.Distance(lastPosition, transform.position);
             lastPosition = transform.position;
-            if(healthBar.HealthBarRedrawAndIsEmpty())
-                Reset();
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && currentWaveLives>=1)
             {
                 activeState = photonStates.WAVE;
                     Debug.LogError("WAVE STATE!");
@@ -72,13 +72,19 @@ public class photon : MonoBehaviour
                     circle.SetActive(true);
                     trail.enabled = false;
                 }
+            if(healthBar.HealthBarRedrawAndIsEmpty()){
+                Reset();
+            }
             break;
         case photonStates.WAVE:
+            
             if (Input.GetMouseButtonUp(0))
             {
                     direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     if (direction.magnitude <waveDistance)
                     {
+                        currentWaveLives-=1;
+                        waveLivesDisplay.SetLives(currentWaveLives);
                         activeState = photonStates.IDLE;
                         Debug.LogError("Idle STATE!");
                         circle.SetActive(false);
@@ -100,15 +106,21 @@ public class photon : MonoBehaviour
         {
             Debug.LogError("AIMING STATE!");
             activeState = photonStates.AIMING;
+            aimArrow.ToggleArrow(true);
         }
         
     }
 
     public void Reset(){
+        trail.enabled = false;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        rb.constraints = RigidbodyConstraints2D.None;
         activeState = photonStates.IDLE;
         transform.position = startingCoordinates;
+        lastPosition = startingCoordinates;
         distanceTraveled = 0;
         currentWaveLives = maxWaveLives;
+        waveLivesDisplay.SetLives(currentWaveLives);
         healthBar.HealthBarRedrawAndIsEmpty();
     }
 

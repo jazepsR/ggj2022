@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class aimArrow : MonoBehaviour
 {
-    private SpriteRenderer sprite;
+    public SpriteRenderer sprite;
     public float rotationSpeed = 20;
 
     private void Awake()
     {
-        sprite = GetComponent<SpriteRenderer>();
+
     }
     // Start is called before the first frame update
     void Start()

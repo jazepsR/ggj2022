@@ -8,7 +8,7 @@ public class photon : MonoBehaviour
     public float force = 10;
     public float waveDistance = 7;
     Rigidbody2D rb;
-    enum photonStates  {PARTICLE,WAVE,IDLE,AIMING};
+    enum photonStates  {PARTICLE,WAVE,IDLE,AIMING, FINISH};
     photonStates activeState = photonStates.IDLE;
     public GameObject circle;
     TrailRenderer trail;
@@ -20,7 +20,8 @@ public class photon : MonoBehaviour
     public int currentWaveLives = 5;
     public waveLives waveLivesDisplay;
     [SerializeField] private aimArrow aimArrow;
-
+    private Transform finish;
+    public float finishPullForce = 1000;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -95,11 +96,30 @@ public class photon : MonoBehaviour
 
                 }
             break;
+            case photonStates.FINISH:
+                direction = transform.position - finish.position;
+                rb.angularDrag = 10;
+                rb.drag = 5;
+                if(direction.magnitude<0.2f)
+                {
+                    LevelController.instance.CompleteLevel();
+                }
+                else
+                {
+                    rb.AddForce(-direction.normalized * Time.deltaTime * finishPullForce);
+                }
+
+                break;
 
     }
 
     }
+    public void OnReachedFinish(Transform finish)
+    {
+        this.finish = finish;
+        activeState = photonStates.FINISH;
 
+    }
     public void onClick()
     {
         if (activeState == photonStates.IDLE)

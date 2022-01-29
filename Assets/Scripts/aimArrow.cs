@@ -19,7 +19,10 @@ public class aimArrow : MonoBehaviour
 
     public void ToggleArrow(bool isActive)
     {
-        sprite.enabled = isActive;
+        if (sprite)
+        {
+            sprite.enabled = isActive;
+        }
     }
 
     public void SetRotation(Vector2 direction)

@@ -1067,11 +1067,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 11400000, guid: c7e1bfb912d75f846967c2cee60a574b, type: 2}
+  - {fileID: 11400000, guid: 5908daf443761de43860a6e9ad635fa0, type: 2}
   - {fileID: 11400000, guid: 8c0c2ffc4a4b61b4ab203682729e4cad, type: 2}
   - {fileID: 11400000, guid: e54e6f9a07da33a4a8cb01c26aa04486, type: 2}
   currentLevel: {fileID: 11400000, guid: e54e6f9a07da33a4a8cb01c26aa04486, type: 2}
   levelCompleteMenu: {fileID: 221083590}
+  photon: {fileID: 0}
 --- !u!4 &681806955
 Transform:
   m_ObjectHideFlags: 0

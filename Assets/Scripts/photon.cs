@@ -23,6 +23,11 @@ public class photon : MonoBehaviour
     private Transform finish;
     public float finishPullForce = 1000;
     public LayerMask layerMask;
+    public Sprite idleFace;
+    public Sprite flyingFace;
+    public Sprite waveFace;
+    public SpriteRenderer photonRenderer;
+    public SpriteRenderer faceRenderer;
 
     public void SetUp(int maxWaveTravels, float maxParticleDuration, Transform startPoint){
         maxDistance = maxParticleDuration;
@@ -55,6 +60,8 @@ public class photon : MonoBehaviour
     {
         case photonStates.IDLE:
                 trail.enabled = true;
+                faceRenderer.sprite = idleFace;
+                photonRenderer.enabled = true;
                 //Vector2 direction = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
                 break;
         case photonStates.AIMING:
@@ -62,11 +69,12 @@ public class photon : MonoBehaviour
                 direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 aimArrow.SetRotation(direction);
                 if (Input.GetMouseButtonUp(0))
-            {
-                rb.AddForce(direction.normalized * force);
-                activeState = photonStates.PARTICLE;
-                Debug.LogError("Particle STATE!");
+                {
+                    rb.AddForce(direction.normalized * force);
+                    activeState = photonStates.PARTICLE;
+                    Debug.LogError("Particle STATE!");
                     aimArrow.ToggleArrow(false);
+                    faceRenderer.sprite = flyingFace;
                 }
             
             break;
@@ -76,14 +84,13 @@ public class photon : MonoBehaviour
             lastPosition = transform.position;
             if (Input.GetMouseButtonDown(0) && currentWaveLives>=1)
                 {
-                    direction = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-                        activeState = photonStates.WAVE;
-                        Debug.LogError("WAVE STATE!");
-                        rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                        circle.SetActive(true);
-                        trail.enabled = false;
-
+                    activeState = photonStates.WAVE;
+                    Debug.LogError("WAVE STATE!");
+                    rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                    circle.SetActive(true);
+                    trail.enabled = false;
+                    faceRenderer.sprite = waveFace;
+                    photonRenderer.enabled = false;
                 }
             if(healthBar.HealthBarRedrawAndIsEmpty()){
                 Reset();

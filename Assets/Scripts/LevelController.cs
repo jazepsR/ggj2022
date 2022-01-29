@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 public class LevelController : MonoBehaviour
 {
     public LevelData[] levels;
-   [HideInInspector] public LevelData currentLevel;
+   [HideInInspector] public LevelData currentLevelData;
+    [HideInInspector] public Level activeLevel;
     public static LevelController instance;
     public GameObject levelCompleteMenu;
 
@@ -18,13 +19,13 @@ public class LevelController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentLevel = levels[Var.currentLevel % levels.Length];
-        GenerateLevel(currentLevel);
+        currentLevelData = levels[Var.currentLevel % levels.Length];
+        GenerateLevel(currentLevelData);
     }
 
     public void GenerateLevel(LevelData level)
     {
-        Instantiate(level.levelGeometry);
+        activeLevel= Instantiate(level.levelGeometry);
         photon.SetUp(level.shotsAllowed, level.particleDuration, level.levelGeometry.start);
         
     }

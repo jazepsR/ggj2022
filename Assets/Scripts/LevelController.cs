@@ -9,6 +9,8 @@ public class LevelController : MonoBehaviour
     public static LevelController instance;
     public GameObject levelCompleteMenu;
 
+    public photon photon;
+
     private void Awake()
     {
         instance = this;
@@ -23,6 +25,8 @@ public class LevelController : MonoBehaviour
     public void GenerateLevel(LevelData level)
     {
         Instantiate(level.levelGeometry);
+        photon.SetUp(level.shotsAllowed, level.particleDuration, level.levelGeometry.start);
+        
     }
 
     public void CompleteLevel()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class photon : MonoBehaviour
 {
-    public Vector2 startingCoordinates;
+    public Vector2 startingCoordinates; //level speciffic
     public float force = 10;
     public float waveDistance = 7;
     Rigidbody2D rb;
@@ -14,14 +14,21 @@ public class photon : MonoBehaviour
     TrailRenderer trail;
     private Vector3 lastPosition;
     public float distanceTraveled = 0;
-    public float maxDistance = 150;//Probably level speciffic, 
+    public float maxDistance = 150; //level speciffic
     public HealthBar healthBar;
-    public int maxWaveLives = 5;//Probably level speciffic
+    public int maxWaveLives = 5; //level speciffic
     public int currentWaveLives = 5;
     public waveLives waveLivesDisplay;
     [SerializeField] private aimArrow aimArrow;
     private Transform finish;
     public float finishPullForce = 1000;
+
+    public void SetUp(int maxWaveTravels, float maxParticleDuration, Transform startPoint){
+        maxDistance = maxParticleDuration;
+        maxWaveLives = maxWaveTravels;
+        startingCoordinates = startPoint.position;
+        Reset();
+    }
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6a6b613422f8a84ca3a2202d6038884, type: 3}
-  m_Name: Level 2
+  m_Name: Level 3
   m_EditorClassIdentifier: 
-  levelGeometry: {fileID: 7749075644926940155, guid: f3e941d9bbc8b6a43b5c19105e1d0c59, type: 3}
-  shotsAllowed: 0
+  levelGeometry: {fileID: 7749075644926940155, guid: d35ece71b26e71443b77dfe07b7e635d, type: 3}
+  shotsAllowed: 1
   particleDuration: 100

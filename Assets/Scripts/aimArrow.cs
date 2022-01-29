@@ -27,7 +27,10 @@ public class aimArrow : MonoBehaviour
 
     public void SetRotation(Vector2 direction)
     {
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.position, -direction), rotationSpeed);
+      //  Debug.LogError(" direction: " + direction + " rotation: " +  Quaternion.An(transform.position, -direction));
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), rotationSpeed);
+        // Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.position, -direction), rotationSpeed);
     }
 
     // Update is called once per frame

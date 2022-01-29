@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a6b613422f8a84ca3a2202d6038884, type: 3}
+  m_Name: Level 7
+  m_EditorClassIdentifier: 
+  levelGeometry: {fileID: 7749075644926940155, guid: 3cb76706eed02614d985fb49ab05b267, type: 3}
+  shotsAllowed: 3
+  particleDuration: 30

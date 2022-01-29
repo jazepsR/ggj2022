@@ -22,9 +22,9 @@ public class HealthBar : MonoBehaviour
     }
 
     public bool HealthBarRedrawAndIsEmpty() {
-        float fillAmount = Mathf.Clamp(photon.distanceTraveled / photon.maxDistance, 0, 1f);
+        float fillAmount = Mathf.Clamp(1-photon.distanceTraveled / photon.maxDistance, 0, 1f);
         healthBarImage.fillAmount = fillAmount;
-        if(fillAmount==1f){
+        if(fillAmount==0f){
             return true;
         } else{
             return false;

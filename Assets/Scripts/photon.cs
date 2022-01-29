@@ -35,7 +35,7 @@ public class photon : MonoBehaviour
     {
         Debug.LogError("STARTING!");
         lastPosition = transform.position ;
-        waveLivesDisplay.SetLives(currentWaveLives);
+        //waveLivesDisplay.SetLives(currentWaveLives); 
     }
 
     // Update is called once per frame

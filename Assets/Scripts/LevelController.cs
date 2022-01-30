@@ -10,12 +10,14 @@ public class LevelController : MonoBehaviour
     [HideInInspector] public Level activeLevel;
     public static LevelController instance;
     public GameObject levelCompleteMenu;
+    public Animator levelCompleteStarsAnim;
     public CinemachineVirtualCamera cam;
     public photon photon;
     public Transform center;
     private void Awake()
     {
         instance = this;
+        levelCompleteMenu.SetActive(false);
     }
     // Start is called before the first frame update
     void Start()
@@ -37,13 +39,14 @@ public class LevelController : MonoBehaviour
         levelCompleteMenu.gameObject.SetActive(true);
         int score = CalculateScore(livesLeft);
         Debug.LogError("SCORE: " + score);
+        levelCompleteStarsAnim.SetInteger("stars", score);
+        Var.maxUnlockedLevel = Mathf.Max(Var.currentLevel+1, Var.maxUnlockedLevel);
         Var.Save();
     }
 
     public void GoToNextLevel()
     {
         Var.currentLevel++;
-        Var.maxUnlockedLevel = Mathf.Max(Var.currentLevel, Var.maxUnlockedLevel);
         Var.Save();
         SceneManager.LoadScene("SampleScene");
     }
@@ -52,7 +55,10 @@ public class LevelController : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
     }
-
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 
     public int CalculateScore(int livesLeft)
     {

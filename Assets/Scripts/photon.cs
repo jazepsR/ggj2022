@@ -176,7 +176,10 @@ public class photon : MonoBehaviour
         }
         else
         {
-            currentWaveLives--;
+            if (!setup)
+            {
+                currentWaveLives--;
+            }
         }
         trail.Clear();
         trail.enabled = false;

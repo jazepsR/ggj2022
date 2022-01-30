@@ -7,11 +7,12 @@ public class CollectionPoint : MonoBehaviour
     // Start is called before the first frame update
     public bool isFinish = false;
     public bool collected = false;
+    public bool collectedThisThrow = false;
     public GameObject highlight;
 
     private void Start()
     {
-        highlight.SetActive(false);
+        ToggleCollected(false);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -24,16 +25,21 @@ public class CollectionPoint : MonoBehaviour
                 {
                     photon photon = collision.gameObject.GetComponent<photon>();
                     photon.OnReachedFinish(transform);
-                    highlight.SetActive(true);
-                    collected = true;
+                    ToggleCollected(true);
                 }
             }
             else
             {
-                highlight.SetActive(true);
-                collected = true;
+                ToggleCollected(true);
+                collectedThisThrow = true;
             }
             
         }
+    }
+
+    public void ToggleCollected(bool collected)
+    {
+        highlight.SetActive(collected);
+        this.collected = collected;
     }
 }

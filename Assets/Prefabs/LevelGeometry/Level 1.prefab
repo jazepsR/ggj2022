@@ -81,7 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finish: {fileID: 4478556491921359233}
   start: {fileID: 5209916556547667968}
-  chechpoints:
+  checkPoints:
   - {fileID: 2678767793276968206}
   - {fileID: 1449438805668211213}
 --- !u!1 &5644479698481205138

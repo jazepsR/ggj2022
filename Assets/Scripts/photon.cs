@@ -171,6 +171,9 @@ public class photon : MonoBehaviour
         currentWaveLives = maxWaveLives;
         waveLivesDisplay.SetLives(currentWaveLives);
         healthBar.HealthBarRedrawAndIsEmpty();
+        //Checkpoints
+        LevelController.instance.activeLevel.DiscardCollectedThisThrow();
+
     }
 
 }

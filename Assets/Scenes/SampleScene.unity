@@ -1493,8 +1493,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 11400000, guid: 0bf4b7b08828de6448c3eb49cae5d702, type: 2}
   - {fileID: 11400000, guid: 5d5a8a7b9098ae444b10e9bd892dba5b, type: 2}
+  - {fileID: 11400000, guid: 0bf4b7b08828de6448c3eb49cae5d702, type: 2}
   - {fileID: 11400000, guid: 9e9186c78c98d6644a5b5ab979fdcb3b, type: 2}
   - {fileID: 11400000, guid: 5908daf443761de43860a6e9ad635fa0, type: 2}
   - {fileID: 11400000, guid: e54e6f9a07da33a4a8cb01c26aa04486, type: 2}
@@ -1857,11 +1857,11 @@ MonoBehaviour:
   m_ScreenY: 0.5
   m_CameraDistance: 10
   m_DeadZoneWidth: 0.7
-  m_DeadZoneHeight: 0.7
+  m_DeadZoneHeight: 0.6
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.85
-  m_SoftZoneHeight: 2
+  m_SoftZoneHeight: 0.8
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 0

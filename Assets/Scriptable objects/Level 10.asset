@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6a6b613422f8a84ca3a2202d6038884, type: 3}
-  m_Name: Level 9
+  m_Name: Level 10
   m_EditorClassIdentifier: 
-  levelGeometry: {fileID: 7749075644926940155, guid: b2d4d91781864fc42bb24e48a3d471cb, type: 3}
-  shotsAllowed: 3
-  particleDuration: 40
+  levelGeometry: {fileID: 7749075644926940155, guid: f37d5d675dee8de4abbc46ffa078ebfa, type: 3}
+  shotsAllowed: 5
+  particleDuration: 60
   staticCamera: 0

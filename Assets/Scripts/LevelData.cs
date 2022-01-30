@@ -10,7 +10,6 @@ public class LevelData : ScriptableObject
     public int shotsAllowed = 3;
     public int bestScoreShots = 3;
     public float particleDuration = 50;
-    public bool staticCamera = true;
-   
+    public bool staticCamera = true;  
 
 }

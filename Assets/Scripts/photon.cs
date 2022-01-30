@@ -29,6 +29,7 @@ public class photon : MonoBehaviour
     public SpriteRenderer photonRenderer;
     public SpriteRenderer faceRenderer;
 
+    bool levelCompleted = false;
     public void SetUp(int maxWaveTravels, float maxParticleDuration, Transform startPoint){
         maxDistance = maxParticleDuration;
         maxWaveLives = maxWaveTravels;
@@ -127,23 +128,28 @@ public class photon : MonoBehaviour
                 }
             break;
             case photonStates.FINISH:
-                direction = transform.position - finish.position;
-                rb.angularDrag = 10;
-                rb.drag = 5;
-                if(direction.magnitude<0.2f)
+                if (!levelCompleted)
                 {
-                    LevelController.instance.CompleteLevel();
-                }
-                else
-                {
-                    rb.AddForce(-direction.normalized * Time.deltaTime * finishPullForce);
+                    direction = transform.position - finish.position;
+                    rb.angularDrag = 10;
+                    rb.drag = 5;
+                    if (direction.magnitude < 0.2f)
+                    {
+                        LevelController.instance.CompleteLevel(currentWaveLives);
+                        levelCompleted = true;
+                    }
+                    else
+                    {
+                        rb.AddForce(-direction.normalized * Time.deltaTime * finishPullForce);
+                    }
                 }
 
                 break;
-
+        }
     }
 
-    }
+
+
     public void OnReachedFinish(Transform finish)
     {
         this.finish = finish;

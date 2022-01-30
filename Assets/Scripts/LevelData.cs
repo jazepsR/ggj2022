@@ -8,8 +8,8 @@ public class LevelData : ScriptableObject
 {
     public Level levelGeometry;
     public int shotsAllowed = 3;
+    public int bestScoreShots = 3;
     public float particleDuration = 50;
-    public bool staticCamera = true;
-   
+    public bool staticCamera = true;  
 
 }

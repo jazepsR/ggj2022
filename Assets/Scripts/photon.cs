@@ -23,12 +23,11 @@ public class photon : MonoBehaviour
     private Transform finish;
     public float finishPullForce = 1000;
     public LayerMask layerMask;
-    public Sprite idleFace;
-    public Sprite flyingFace;
-    public Sprite waveFace;
+    private Animator anim;
     public SpriteRenderer photonRenderer;
     public SpriteRenderer faceRenderer;
 
+    bool levelCompleted = false;
     public void SetUp(int maxWaveTravels, float maxParticleDuration, Transform startPoint){
         maxDistance = maxParticleDuration;
         maxWaveLives = maxWaveTravels;
@@ -43,6 +42,7 @@ public class photon : MonoBehaviour
         startingCoordinates = transform.position;
         lastPosition = transform.position ;
         aimArrow.ToggleArrow(false);
+        anim = GetComponent<Animator>();
  
     }
     // Start is called before the first frame update
@@ -60,7 +60,7 @@ public class photon : MonoBehaviour
     {
         case photonStates.IDLE:
                 trail.enabled = true;
-                faceRenderer.sprite = idleFace;
+                anim.SetInteger("state", 0);
                 photonRenderer.enabled = true;
                 LevelController.instance.activeLevel.PrepForNextThrow();
                 //Vector2 direction = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
@@ -75,7 +75,7 @@ public class photon : MonoBehaviour
                     activeState = photonStates.PARTICLE;
                     Debug.LogError("Particle STATE!");
                     aimArrow.ToggleArrow(false);
-                    faceRenderer.sprite = flyingFace;
+                    anim.SetInteger("state", 1);
                 }
             
             break;
@@ -91,7 +91,7 @@ public class photon : MonoBehaviour
                     rb.constraints = RigidbodyConstraints2D.FreezeAll;
                     circle.SetActive(true);
                     trail.enabled = false;
-                    faceRenderer.sprite = waveFace;
+                    anim.SetInteger("state", 2);
                     photonRenderer.enabled = false;
                 }
             if(healthBar.HealthBarRedrawAndIsEmpty()){
@@ -127,23 +127,29 @@ public class photon : MonoBehaviour
                 }
             break;
             case photonStates.FINISH:
-                direction = transform.position - finish.position;
-                rb.angularDrag = 10;
-                rb.drag = 5;
-                if(direction.magnitude<0.2f)
+                if (!levelCompleted)
                 {
-                    LevelController.instance.CompleteLevel();
-                }
-                else
-                {
-                    rb.AddForce(-direction.normalized * Time.deltaTime * finishPullForce);
+                    anim.SetInteger("state", 3);
+                    direction = transform.position - finish.position;
+                    rb.angularDrag = 10;
+                    rb.drag = 5;
+                    if (direction.magnitude < 0.2f)
+                    {
+                        LevelController.instance.CompleteLevel(currentWaveLives);
+                        levelCompleted = true;
+                    }
+                    else
+                    {
+                        rb.AddForce(-direction.normalized * Time.deltaTime * finishPullForce);
+                    }
                 }
 
                 break;
-
+        }
     }
 
-    }
+
+
     public void OnReachedFinish(Transform finish)
     {
         this.finish = finish;

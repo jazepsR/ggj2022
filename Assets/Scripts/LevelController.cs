@@ -13,7 +13,6 @@ public class LevelController : MonoBehaviour
     public CinemachineVirtualCamera cam;
     public photon photon;
     public Transform center;
-
     private void Awake()
     {
         instance = this;
@@ -33,19 +32,41 @@ public class LevelController : MonoBehaviour
         cam.m_LookAt = level.staticCamera ? center : photon.transform;
     }
 
-    public void CompleteLevel()
+    public void CompleteLevel(int livesLeft)
     {
         levelCompleteMenu.gameObject.SetActive(true);
+        int score = CalculateScore(livesLeft);
+        Debug.LogError("SCORE: " + score);
+        Var.Save();
     }
 
     public void GoToNextLevel()
     {
         Var.currentLevel++;
+        Var.maxUnlockedLevel = Mathf.Max(Var.currentLevel, Var.maxUnlockedLevel);
+        Var.Save();
         SceneManager.LoadScene("SampleScene");
     }
 
     public void ResetLevel()
     {
         SceneManager.LoadScene("SampleScene");
+    }
+
+
+    public int CalculateScore(int livesLeft)
+    {
+        if (livesLeft == 0)
+        {
+            return 1;
+        }
+        if((currentLevelData.shotsAllowed - livesLeft) < currentLevelData.bestScoreShots)
+        {
+            return 3;
+        }
+        else
+        {
+            return 2;
+        }
     }
 }

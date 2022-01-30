@@ -154,6 +154,7 @@ MonoBehaviour:
   minAngle: 90
   speed: 40
   rotate360: 0
+  rotateReverse: 0
 --- !u!114 &8558593195991917508
 MonoBehaviour:
   m_ObjectHideFlags: 0

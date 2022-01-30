@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finish: {fileID: 4478556491921359233}
   start: {fileID: 8857296379311968811}
-  chechpoints: []
+  checkPoints: []
 --- !u!1 &5644479698481205138
 GameObject:
   m_ObjectHideFlags: 0

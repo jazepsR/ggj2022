@@ -16,6 +16,7 @@ MonoBehaviour:
   minAngle: 90
   speed: 50
   rotate360: 1
+  rotateReverse: 0
 --- !u!1 &4651735379695076751
 GameObject:
   m_ObjectHideFlags: 0

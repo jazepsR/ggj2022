@@ -148,6 +148,7 @@ MonoBehaviour:
   minAngle: 90
   speed: 40
   rotate360: 1
+  rotateReverse: 0
 --- !u!114 &8558593195991917508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +179,7 @@ MonoBehaviour:
   minAngle: 0
   speed: 40
   rotate360: 1
+  rotateReverse: 0
 --- !u!1001 &291176441720936722
 PrefabInstance:
   m_ObjectHideFlags: 0

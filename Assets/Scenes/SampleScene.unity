@@ -987,6 +987,7 @@ GameObject:
   - component: {fileID: 631210960}
   - component: {fileID: 631210961}
   - component: {fileID: 631210962}
+  - component: {fileID: 631210963}
   m_Layer: 3
   m_Name: photon
   m_TagString: Player
@@ -1037,9 +1038,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 55
-  idleFace: {fileID: 21300000, guid: b63cb87ff20d3974e9dece486f9da9ee, type: 3}
-  flyingFace: {fileID: 21300000, guid: e35591665535f374ebf1da8f35bac5ac, type: 3}
-  waveFace: {fileID: 21300000, guid: 59150d5d4b29fad4881ae3db9d6158a1, type: 3}
   photonRenderer: {fileID: 631210958}
   faceRenderer: {fileID: 1931897337}
 --- !u!212 &631210958
@@ -1267,6 +1265,25 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!95 &631210963
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631210955}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 178178c7d2383f54e877805814b4dbeb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &637947061
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,11 +1510,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
+  - {fileID: 11400000, guid: e54e6f9a07da33a4a8cb01c26aa04486, type: 2}
   - {fileID: 11400000, guid: 5d5a8a7b9098ae444b10e9bd892dba5b, type: 2}
   - {fileID: 11400000, guid: 0bf4b7b08828de6448c3eb49cae5d702, type: 2}
   - {fileID: 11400000, guid: 9e9186c78c98d6644a5b5ab979fdcb3b, type: 2}
   - {fileID: 11400000, guid: 5908daf443761de43860a6e9ad635fa0, type: 2}
-  - {fileID: 11400000, guid: e54e6f9a07da33a4a8cb01c26aa04486, type: 2}
   - {fileID: 11400000, guid: 8c0c2ffc4a4b61b4ab203682729e4cad, type: 2}
   - {fileID: 11400000, guid: 06dc7ad75e2149848a7c03eb54358c47, type: 2}
   - {fileID: 11400000, guid: 7c44b67b82b95b8468c8b584ace39c4e, type: 2}

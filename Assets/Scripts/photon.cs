@@ -31,6 +31,7 @@ public class photon : MonoBehaviour
     public void SetUp(int maxWaveTravels, float maxParticleDuration, Transform startPoint){
         maxDistance = maxParticleDuration;
         maxWaveLives = maxWaveTravels;
+        currentWaveLives = maxWaveLives;
         startingCoordinates = startPoint.position;
         Reset();
     }

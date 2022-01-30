@@ -47,6 +47,7 @@ public class MainMenu : MonoBehaviour
     }
     public void Play()
     {
+        Var.currentLevel = 0;
         SceneManager.LoadScene("SampleScene");
     }
 
@@ -64,7 +65,7 @@ public class MainMenu : MonoBehaviour
 
     public void CloseTutorial()
     {
-        tutorial.SetActive(false);
+        //tutorial.SetActive(false);
         Play();
     }
 

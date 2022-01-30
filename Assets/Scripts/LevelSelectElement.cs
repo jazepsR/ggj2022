@@ -10,9 +10,9 @@ public class LevelSelectElement : MonoBehaviour
 {
     // Start is called before the first frame update
     public Image bg;
-    public Color completedColor;
-    public Color availableColor;
-    public Color lockedColor;
+    public Sprite completedColor;
+    public Sprite availableColor;
+    public Sprite lockedColor;
     public TMP_Text text;
     private int id;
     bool available;
@@ -28,15 +28,15 @@ public class LevelSelectElement : MonoBehaviour
         switch(state)
         {
             case levelState.AVAILABLE:
-                bg.color = availableColor;
+                bg.sprite = availableColor;
                 available = true;
                 break;
             case levelState.COMPLETED:
-                bg.color = completedColor;
+                bg.sprite = completedColor;
                 available = true;
                 break;
             case levelState.LOCKED:
-                bg.color = lockedColor;
+                bg.sprite = lockedColor;
                 available = false;
                 break;
         }

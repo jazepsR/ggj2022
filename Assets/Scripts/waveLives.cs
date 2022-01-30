@@ -31,7 +31,7 @@ public class waveLives : MonoBehaviour
 
     public void SetLives(int currentLives){
         for (int i = 0; i < lives.Length; i++){
-            if(currentLives>i)
+            if(currentLives>=i)
                 lives[i].enabled = true;
             else 
                 lives[i].enabled = false;

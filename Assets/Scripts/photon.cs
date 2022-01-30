@@ -33,7 +33,7 @@ public class photon : MonoBehaviour
         maxWaveLives = maxWaveTravels;
         currentWaveLives = maxWaveLives;
         startingCoordinates = startPoint.position;
-        Reset();
+        Reset(true);
     }
     private void Awake()
     {
@@ -169,7 +169,7 @@ public class photon : MonoBehaviour
         
     }
 
-    public void Reset(){
+    public void Reset(bool setup = false){
         if(currentWaveLives==0)
         {
             LevelController.instance.levelLoseMenu.SetActive(true);

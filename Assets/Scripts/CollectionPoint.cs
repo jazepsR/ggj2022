@@ -16,7 +16,7 @@ public class CollectionPoint : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.LogError("got hit by " + collision.tag);
+        //Debug.LogError("got hit by " + collision.tag);
         if (collision.tag == "Player")
         { 
             if(isFinish)

@@ -36,11 +36,14 @@ public class LevelController : MonoBehaviour
     public void CompleteLevel()
     {
         levelCompleteMenu.gameObject.SetActive(true);
+        Var.Save();
     }
 
     public void GoToNextLevel()
     {
         Var.currentLevel++;
+        Var.maxUnlockedLevel = Mathf.Max(Var.currentLevel, Var.maxUnlockedLevel);
+        Var.Save();
         SceneManager.LoadScene("SampleScene");
     }
 

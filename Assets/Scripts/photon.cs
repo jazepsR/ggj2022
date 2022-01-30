@@ -62,6 +62,7 @@ public class photon : MonoBehaviour
                 trail.enabled = true;
                 faceRenderer.sprite = idleFace;
                 photonRenderer.enabled = true;
+                LevelController.instance.activeLevel.PrepForNextThrow();
                 //Vector2 direction = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
                 break;
         case photonStates.AIMING:

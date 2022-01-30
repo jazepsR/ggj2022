@@ -65,17 +65,17 @@ public class PlatformRotation : MonoBehaviour
 
         transform.rotation = Quaternion.Lerp(from, to, Time.time * speed);
         
-        updateFromTo();
+        //updateFromTo();
 
     }
 
-    private void updateFromTo(){
-        if (Quaternion.Angle(transform.rotation, target.rotation) < 0.5f){
+    // private void updateFromTo(){
+    //     if (Quaternion.Angle(transform.rotation, target.rotation) < 0.5f){
 
 
-        }
+    //     }
 
-    }
+    // }
 
     // public static Vector2 Rotate(Vector2 v, float degrees) {
     //      float sin = Mathf.Sin(degrees * Mathf.Deg2Rad);

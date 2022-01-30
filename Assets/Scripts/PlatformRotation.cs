@@ -10,6 +10,7 @@ public class PlatformRotation : MonoBehaviour
     [SerializeField] int maxAngle = 180, minAngle = 90;
 
     [SerializeField] float speed = 1f;
+    [SerializeField] bool rotate360 = false;
     
     private int direction = 1;
     
@@ -17,25 +18,43 @@ public class PlatformRotation : MonoBehaviour
     Vector2 startPosition;
 
     Quaternion startRotation;
-
     Quaternion endRotation;
+    Quaternion middleRotation;
+    bool useMiddlePoint = false;
 
-    Vector2 Edge1;
+    Quaternion[] order;
 
-    Vector2 Edge2;
+
+    Quaternion from;
+    Quaternion to;
  
     void Awake()
     {
         startPosition = transform.position;
         startRotation = Quaternion.Euler(0, 0, minAngle);
         endRotation = Quaternion.Euler(0, 0, maxAngle);
-        Edge1 = startRotation * startPosition;
-        Edge2 = endRotation * startPosition;
 
-        Debug.LogError(startRotation);
-        Debug.LogError(endRotation);
-        Debug.LogError(Edge1);
-        Debug.LogError(Edge2);
+        if(maxAngle>180){
+            middleRotation = Quaternion.Euler(0, 0, (maxAngle - minAngle)/2);
+            order = new Quaternion[]{startRotation,middleRotation,endRotation,middleRotation};
+        }
+        if(rotate360){
+            startRotation = Quaternion.Euler(0, 0, 0);
+            middleRotation = Quaternion.Euler(0, 0, 180);
+            endRotation = Quaternion.Euler(0, 0, 360);
+            order = new Quaternion[]{startRotation,middleRotation,endRotation,startRotation};
+        } else {
+            order = new Quaternion[]{startRotation,endRotation};
+        }
+
+
+        // Edge1 = startRotation * startPosition;
+        // Edge2 = endRotation * startPosition;
+
+        // Debug.LogError(startRotation);
+        // Debug.LogError(endRotation);
+        // Debug.LogError(Edge1);
+        // Debug.LogError(Edge2);
  
     }
  
@@ -44,15 +63,17 @@ public class PlatformRotation : MonoBehaviour
     {
         float step =  speed * Time.deltaTime; // calculate distance to move
 
-        transform.rotation = Quaternion.Lerp(startRotation, endRotation, Time.time * speed);
-
-        //transform.rotation = Mathf.Clamp(speed * Time.deltaTime + minAngle, minAngle, maxAngle);
-
-        //transform.position = Vector3.RotateTowards(Edge1, Edge2, step, 0.0f);
-
-        //Debug.LogError("position " + Vector3.RotateTowards(Edge1, Edge2, step, 0.0f)); 
-
+        transform.rotation = Quaternion.Lerp(from, to, Time.time * speed);
         
+        updateFromTo();
+
+    }
+
+    private void updateFromTo(){
+        if (Quaternion.Angle(transform.rotation, target.rotation) < 0.5f){
+
+
+        }
 
     }
 

@@ -10,6 +10,7 @@ public class LevelController : MonoBehaviour
     [HideInInspector] public Level activeLevel;
     public static LevelController instance;
     public GameObject levelCompleteMenu;
+    public GameObject levelLoseMenu;
     public Animator levelCompleteStarsAnim;
     public CinemachineVirtualCamera cam;
     public photon photon;
@@ -18,6 +19,7 @@ public class LevelController : MonoBehaviour
     {
         instance = this;
         levelCompleteMenu.SetActive(false);
+        levelLoseMenu.SetActive(false);
     }
     // Start is called before the first frame update
     void Start()

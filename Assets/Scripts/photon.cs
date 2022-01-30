@@ -39,7 +39,6 @@ public class photon : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         circle.SetActive(false);    
         trail = GetComponent<TrailRenderer>();
-        startingCoordinates = transform.position;
         lastPosition = transform.position ;
         aimArrow.ToggleArrow(false);
         anim = GetComponent<Animator>();
@@ -48,7 +47,7 @@ public class photon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.LogError("STARTING!");
+     //   Debug.LogError("STARTING!");
         waveLivesDisplay.SetLives(currentWaveLives); 
     }
 
@@ -59,6 +58,7 @@ public class photon : MonoBehaviour
     switch (activeState)
     {
         case photonStates.IDLE:
+                startingCoordinates = transform.position;
                 trail.enabled = true;
                 anim.SetInteger("state", 0);
                 photonRenderer.enabled = true;
@@ -73,7 +73,7 @@ public class photon : MonoBehaviour
                 {
                     rb.AddForce(direction.normalized * force);
                     activeState = photonStates.PARTICLE;
-                    Debug.LogError("Particle STATE!");
+                  // Debug.LogError("Particle STATE!");
                     aimArrow.ToggleArrow(false);
                     anim.SetInteger("state", 1);
                 }
@@ -87,7 +87,7 @@ public class photon : MonoBehaviour
                 {
                     distanceTraveled = 0.0f;
                     activeState = photonStates.WAVE;
-                    Debug.LogError("WAVE STATE!");
+                   // Debug.LogError("WAVE STATE!");
                     rb.constraints = RigidbodyConstraints2D.FreezeAll;
                     circle.SetActive(true);
                     trail.enabled = false;
@@ -112,11 +112,12 @@ public class photon : MonoBehaviour
                             currentWaveLives -=1;
                             waveLivesDisplay.SetLives(currentWaveLives);
                             activeState = photonStates.IDLE;
-                            Debug.LogError("Idle STATE!");
+                           // Debug.LogError("Idle STATE!");
                             circle.SetActive(false);
                             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                             transform.position = pos;
                             rb.constraints = RigidbodyConstraints2D.None;
+                            trail.Clear();
                         }
                         else
                         {
@@ -160,7 +161,7 @@ public class photon : MonoBehaviour
     {
         if (activeState == photonStates.IDLE)
         {
-            Debug.LogError("AIMING STATE!");
+           // Debug.LogError("AIMING STATE!");
             activeState = photonStates.AIMING;
             aimArrow.ToggleArrow(true);
         }
@@ -168,6 +169,15 @@ public class photon : MonoBehaviour
     }
 
     public void Reset(){
+        if(currentWaveLives==0)
+        {
+            LevelController.instance.levelLoseMenu.SetActive(true);
+        }
+        else
+        {
+            currentWaveLives--;
+        }
+        trail.Clear();
         trail.enabled = false;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         rb.constraints = RigidbodyConstraints2D.None;
@@ -175,11 +185,10 @@ public class photon : MonoBehaviour
         transform.position = startingCoordinates;
         lastPosition = startingCoordinates;
         distanceTraveled = 0;
-        currentWaveLives = maxWaveLives;
         waveLivesDisplay.SetLives(currentWaveLives);
         healthBar.HealthBarRedrawAndIsEmpty();
-        //Checkpoints
         LevelController.instance.activeLevel.DiscardCollectedThisThrow();
+        //Checkpoints
 
     }
 

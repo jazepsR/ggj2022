@@ -6,7 +6,7 @@ public static class Var
 {
     public static int maxUnlockedLevel = 0;
     public static int currentLevel = 0;
-    public static readonly int levelCount = 8;
+    public static readonly int levelCount = 12;
 
     public static void Save()
     {

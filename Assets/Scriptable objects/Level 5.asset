@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelGeometry: {fileID: 7749075644926940155, guid: 8a96795d9a8d6884cb46f5348d2eae6b, type: 3}
   shotsAllowed: 2
+  bestScoreShots: 1
   particleDuration: 30
   staticCamera: 1
